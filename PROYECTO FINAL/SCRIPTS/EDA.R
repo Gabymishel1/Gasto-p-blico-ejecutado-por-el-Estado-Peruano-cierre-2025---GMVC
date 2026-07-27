@@ -1,5 +1,5 @@
 
-## PROYECTO FINAL - Gasto público ejecutado por el Estado Peruano (cierre 2025)
+## Gasto público ejecutado por el Estado Peruano (cierre 2025) - PRIMERA PARTE
 library(dplyr)
 library(ggplot2)
 library(readr)
@@ -37,6 +37,7 @@ df %>%
   table() %>% 
   as_tibble() %>% 
   arrange(desc(n) ) 
+
 
 df %>% 
   select(Descripción_de_Servicio) %>%
@@ -83,7 +84,7 @@ df %>%
   )%>% 
   arrange(desc(promedio) )
 
-    # BOXPLOT
+    # FIGURES
   #1
 plot1 <- df %>% 
   ggplot(aes(x=Monto_asignado, y =Nombre_del_departamento, fill=factor(Nombre_del_departamento) ))+ 
@@ -167,8 +168,7 @@ plot4 <- df %>%
   )
 plot4
 
-
-## FIN - primera parte##
+###
 
 library(patchwork)
 
@@ -180,43 +180,34 @@ pjoin <- ((plot1 + plot2) / (plot3 + plot4)) +
     axis.text.y = element_text(size = 7),
     plot.title = element_text(size = 10, face = "bold")
   )
-
 ggsave(
-  filename = "../COLLAGE/grafico.png", 
+  filename = "../FIGURES/PARTE 1/COLLAGE.png", 
   plot = pjoin, 
-  width = 16, 
-  height = 10, 
-  dpi = 300, 
-  units = "in"
+  width = 16, height = 10, dpi = 300, units = "in"
 )
 
-#Gráficos individuales
-dir.create("../COLLAGE", showWarnings = FALSE)
-
-
+# Gráficos individuales 
 ggsave(
-  filename = "../COLLAGE/grafico_1_departamentos.png", 
+  filename = "../FIGURES/PARTE 1/grafico_1_departamentos.png", 
   plot = plot1, 
   width = 8, height = 6, dpi = 300, units = "in"
 )
 
-
 ggsave(
-  filename = "../COLLAGE/grafico_2_nivel_gobierno.png", 
+  filename = "../FIGURES/PARTE 1/grafico_2_nivel_gobierno.png", 
   plot = plot2, 
   width = 8, height = 6, dpi = 300, units = "in"
 )
 
-
 ggsave(
-  filename = "../COLLAGE/grafico_3_presupuesto_ejecutado.png", 
+  filename = "../FIGURES/PARTE 1/grafico_3_presupuesto_ejecutado.png", 
   plot = plot3, 
   width = 8, height = 6, dpi = 300, units = "in"
 )
 
-
 ggsave(
-  filename = "../COLLAGE/grafico_4_tipo_servicio.png", 
+  filename = "../FIGURES/PARTE 1/grafico_4_tipo_servicio.png", 
   plot = plot4, 
   width = 8, height = 6, dpi = 300, units = "in"
 )
+
