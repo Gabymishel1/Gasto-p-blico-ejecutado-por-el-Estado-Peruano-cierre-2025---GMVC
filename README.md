@@ -1,73 +1,84 @@
-# Gasto-p-blico-ejecutado-por-el-Estado-Peruano-cierre-2025---GMVC
-Evaluando la distribución y eficiencia del gasto público en Perú
-# EDA: Análisis del gasto público ejecutado por el Estado Peruano — cierre 2025
+# Proyecto Final — Análisis Exploratorio de Datos en R
+## Gasto público ejecutado por el Estado Peruano — Cierre 2025
 
-## Contexto
+## 1. Contexto
 
-- **Institución:** [Ministerio de Economía y Finanzas (MEF) — Contabilidad Pública](https://datosabiertos.mef.gob.pe/dataset/clasificacion-funcional-del-gasto/resource/4649413a-63b5-4818-9232-3920cb53bc84)
-- **Objetivo:** Registrar la ejecución del gasto público a nivel de pliego, departamento y servicio, tanto del presupuesto asignado como del monto efectivamente devengado, para fines de transparencia y control fiscal.
+**Institución:** Ministerio de Economía y Finanzas del Perú (MEF), a través
+de su [Portal de Datos Abiertos - Clasificación Funcional del Gasto](https://datosabiertos.mef.gob.pe/dataset/clasificacion-funcional-del-gasto/resource/4649413a-63b5-4818-9232-3920cb53bc84).
 
-## Estructura del repositorio
+**Objetivo:** analizar cómo se distribuye y cómo se ejecuta el gasto público del Estado peruano al cierre del año fiscal 2025, ya que se pudo observar grandes diferencias en montos de presupuesto y gasto entre departamentos y niveles de gobierno, pero eso no revela qué tan bien se usó ese dinero. Este análisis busca justamente eso, medir la eficiencia de ejecución y compararla con departamento, nivel de gobierno y tipo de servicio, para ubicar dónde falla más la ejecución y saber exactamente la razón del problema.
+
+**Principales variables:**
+
+| Variable (original)             | Variable (renombrada)              |
+|----------------------------------|--------------------------------------|
+| `NIVEL_GOBIERNO_NOMBRE`          | `Nivel_de_Gobierno_de_la_Entidad`   |
+| `PLIEGO_NOMBRE`                  | `Descripción_de_Pliego`             |
+| `DEPARTAMENTO_EJECUTORA_NOMBRE`  | `Nombre_del_departamento`           |
+| `DISTRITO_EJECUTORA_NOMBRE`      | `Nombre_del_distrito`               |
+| `SERVICIO_NOMBRE`                | `Descripción_de_Servicio`           |
+| `FUNCION_NOMBRE`                 | `Descripción_de_Función`            |
+| `AFIN_AP3`                       | `Monto_asignado`                    |
+| `EJEC_AP3`                       | `Monto_ejecutado`                   |
+
+Variable derivada: `avance_pct = Monto_ejecutado / Monto_asignado * 100`
+(% de ejecución del presupuesto).
+
+## 2. Estructura del repositorio
 
 ```
-Gasto-p-blico-ejecutado-por-el-Estado-Peruano-cierre-2025---GMVC/
-├── README.md
-└── PROYECTO FINAL/
-    ├── DATA/
-    │   └── gasto_público.csv         ← 24 137 registros (cierre 2025)
-    ├── SCRIPTS/
-    │   └── EDA.R                     ← Análisis exploratorio completo
-    └── COLLAGE/
-        ├── grafico.png               ← Collage con los 4 gráficos
-        ├── grafico_1_departamentos.png
-        ├── grafico_2_nivel_gobierno.png
-        ├── grafico_3_presupuesto_ejecutado.png
-        └── grafico_4_tipo_servicio.png
+Proyecto_Final/
+├── DATA/
+│   └── gasto_público.csv
+├── FIGURES/
+│   ├── PARTE 1/
+│   │   ├── COLLAGE.png
+│   │   ├── grafico_1_departamentos.png
+│   │   ├── grafico_2_nivel_gobierno.png
+│   │   ├── grafico_3_presupuesto_ejecutado.png
+│   │   └── grafico_4_tipo_servicio.png
+│   └── PARTE 2/
+│       ├── grafico_final.png
+│       ├── grafico_1_ranking_departamentos.png
+│       ├── grafico_2_distribucion_del_avance.png
+│       └── grafico_3_deptos_rezagados.png
+├── SCRIPTS/
+│   ├── EDA.R
+│   └── 04_analisis_final.R
+└── README.md
 ```
 
-  **PARTE I**
+## 3. Parte 1 — EDA (`SCRIPTS/EDA.R`)
 
-  
-- **Variables principales analizadas:**
+Importación, limpieza (renombrado + filtrado), estadísticas descriptivas
+(tablas de frecuencia y `summary()`/`summarise()`) y 4 visualizaciones:
 
-| Variable | Descripción |
-|---|---|
-| `DEPARTAMENTO_EJECUTORA_NOMBRE` | Departamento donde se ejecuta el gasto |
-| `NIVEL_GOBIERNO_NOMBRE` | Nivel de gobierno: Nacional, Regional o Local |
-| `PLIEGO_NOMBRE` | Nombre del pliego presupuestal (ministerio, gobierno regional, etc.) |
-| `SERVICIO_NOMBRE` | Tipo de servicio: generales, sociales, económicos |
-| `FUNCION_NOMBRE` | Función del gasto (educación, salud, transporte, etc.) |
-| `AFIN_AP3` | Monto asignado o Presupuesto Institucional Modificado (PIM) en S/ |
-| `EJEC_AP3` | Monto ejecutado o devengado en S/ |
+- **Gráfico 1:** presupuesto asignado por departamento (boxplot + jitter +
+  promedio etiquetado).
+- **Gráfico 2:** gasto ejecutado (log) según nivel de gobierno.
+- **Gráfico 3:** relación entre presupuesto asignado y ejecutado (log-log).
+- **Gráfico 4:** la misma relación, separada por tipo de servicio.
 
+Todo se junta en `FIGURES/PARTE 1/COLLAGE.png`.
 
-## Resumen del análisis
+---
 
-### Limpieza y transformaciones
+## 4. Parte 2 — Análisis final (`SCRIPTS/04_analisis_final.R`)
 
-- Renombrado de columnas a nombres más legibles (castellano descriptivo).
-- Filtro de registros con monto asignado y ejecutado > 0 (se excluyen partidas sin movimiento).
-- Creación de variables derivadas:
-  - `avance_pct` = (ejecutado / asignado) × 100
-  - `log_asignado` y `log_ejecutado` (transformación logarítmica para normalizar distribuciones).
+**Pregunta de análisis:** ¿Qué departamentos presentan la menor eficiencia
+en la ejecución del gasto público, y qué tipo de servicios explican las
+brechas más críticas?
 
-### Estadísticas descriptivas
+### Análisis
 
-- Tablas de frecuencia por pliego, departamento, distrito, servicio y función.
-- Medidas de tendencia central y dispersión del monto asignado (media, mediana, desviación estándar, asimetría).
-- Las mismas métricas agrupadas por departamento para identificar diferencias regionales.
+- **Gráfico 1:** 5 departamentos ejecutan claramente menos que el resto — Tumbes, Ancash, Moquegua, Ica y Madre de Dios, todos por debajo de 90% (el resto está entre 90% y 95%).
+- **Gráfico 2:** los Gobiernos Regionales ejecutan de forma más consistente, con la mayoría de casos concentrados cerca del 100%. Empresas del Estado y Otras Entidades muestran la distribución más dispersa e irregular.
+- **Gráfico 3:** en los cinco departamentos, Servicios Económicos (obras, transporte, energía, agro) es siempre el peor: Ancash 70%, Ica 74%, frente a ~80-85% en Generales y Sociales.
+- **Gráfico final:** confirma el patrón a nivel nacional, la columna de Servicios Económicos es la más baja en casi todos los departamentos, no solo en los críticos.
 
-### Gráficos generados
+### Conclusiones
 
-| Gráfico | Tipo | ¿Qué muestra? |
-|---|---|---|
-| 1 | Boxplot + puntos | Distribución del monto asignado por departamento, con media etiquetada |
-| 2 | Boxplot con muesca | Gasto ejecutado (escala log) según nivel de gobierno (Nacional, Regional, Local) |
-| 3 | Dispersión + regresión lineal | Relación entre presupuesto asignado y gasto ejecutado (muestra del 50%) |
-| 4 | Dispersión + facetas | Misma relación segmentada por tipo de servicio (generales, sociales, económicos) |
+Si bien los departamentos menos eficientes en la ejecución del gasto público son Ancash, Tumbes, Moquegua, Ica y Madre de Dios, todos por debajo del 90% de avance, frente a un rango de 90-95% en el resto del país. Esa brecha no se explica por una mala gestión generalizada, sino por un tipo de gasto específico, como son los Servicios Económicos (obras, transporte, energía, agro) que están sistemáticamente más atrasados. Ancash llega solo a 70.1%, Ica a 74%, mientras que Servicios Generales y Sociales rondan 80-85% en esos mismos departamentos.
+El gráfico final confirma que este patrón se repite a nivel nacional: la inversión en infraestructura es, en general, el tipo de gasto que peor se ejecuta en todo el Perú. Además, el problema de Ancash aparece tanto en sus municipalidades como en las entidades del Gobierno Nacional que operan ahí, lo que sugiere una dificultad ligada al territorio, no a una sola entidad.
+En resumen, la baja eficiencia de estos cinco departamentos se debe principalmente a su dificultad para ejecutar proyectos de inversión pública (obras, infraestructura,..), no por una debilidad generalizada en toda su gestión presupuestal. Esto sugiere que las políticas de mejora en estos departamentos deberían enfocarse puntualmente en agilizar la ejecución de obras públicas, más que en reformas generales de gestión del gasto.
 
-## Collage de gráficos
-
-![Collage de gráficos](PROYECTO%20FINAL/COLLAGE/grafico.png)
-
-  **PARTE II**
