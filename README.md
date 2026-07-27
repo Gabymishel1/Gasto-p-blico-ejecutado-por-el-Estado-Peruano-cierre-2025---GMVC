@@ -60,7 +60,7 @@ Gasto-p-blico-ejecutado-por-el-Estado-Peruano-cierre-2025---GMVC/
 ### Gráficos generados
 
 | Gráfico | Tipo | ¿Qué muestra? |
-|---|---|
+|---|---|---|
 | 1 | Boxplot + puntos | Distribución del monto asignado por departamento, con media etiquetada |
 | 2 | Boxplot con muesca | Gasto ejecutado (escala log) según nivel de gobierno (Nacional, Regional, Local) |
 | 3 | Dispersión + regresión lineal | Relación entre presupuesto asignado y gasto ejecutado (muestra del 50%) |
