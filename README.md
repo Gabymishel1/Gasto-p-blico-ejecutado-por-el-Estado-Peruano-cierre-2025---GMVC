@@ -1,4 +1,4 @@
-# Proyecto Final — Análisis Exploratorio de Datos en R
+# Proyecto Final - Análisis Exploratorio de Datos en R
 ## Gasto público ejecutado por el Estado Peruano — Cierre 2025
 
 ## 1. Contexto
@@ -48,30 +48,27 @@ Proyecto_Final/
 └── README.md
 ```
 
-## 3. Parte 1 — EDA (`SCRIPTS/EDA.R`)
+## 3. Parte 1 - EDA (`SCRIPTS/EDA.R`)
 
 Importación, limpieza (renombrado + filtrado), estadísticas descriptivas
 (tablas de frecuencia y `summary()`/`summarise()`) y 4 visualizaciones:
 
-- **Gráfico 1:** presupuesto asignado por departamento (boxplot + jitter +
-  promedio etiquetado).
+- **Gráfico 1:** presupuesto asignado por departamento.
 - **Gráfico 2:** gasto ejecutado (log) según nivel de gobierno.
 - **Gráfico 3:** relación entre presupuesto asignado y ejecutado (log-log).
 - **Gráfico 4:** la misma relación, separada por tipo de servicio.
 
 Todo se junta en `FIGURES/PARTE 1/COLLAGE.png`.
 
----
+--
 
-## 4. Parte 2 — Análisis final (`SCRIPTS/04_analisis_final.R`)
+## 4. Parte 2 - Análisis final (`SCRIPTS/04_analisis_final.R`)
 
-**Pregunta de análisis:** ¿Qué departamentos presentan la menor eficiencia
-en la ejecución del gasto público, y qué tipo de servicios explican las
-brechas más críticas?
+**Pregunta de análisis:** ¿Qué departamentos presentan la menor eficiencia en la ejecución del gasto público, y qué tipo de servicios explican las brechas más críticas?
 
 ### Análisis
 
-- **Gráfico 1:** 5 departamentos ejecutan claramente menos que el resto — Tumbes, Ancash, Moquegua, Ica y Madre de Dios, todos por debajo de 90% (el resto está entre 90% y 95%).
+- **Gráfico 1:** 5 departamentos ejecutan claramente menos que el resto - Tumbes, Ancash, Moquegua, Ica y Madre de Dios, todos por debajo de 90% (el resto está entre 90% y 95%).
 - **Gráfico 2:** los Gobiernos Regionales ejecutan de forma más consistente, con la mayoría de casos concentrados cerca del 100%. Empresas del Estado y Otras Entidades muestran la distribución más dispersa e irregular.
 - **Gráfico 3:** en los cinco departamentos, Servicios Económicos (obras, transporte, energía, agro) es siempre el peor: Ancash 70%, Ica 74%, frente a ~80-85% en Generales y Sociales.
 - **Gráfico final:** confirma el patrón a nivel nacional, la columna de Servicios Económicos es la más baja en casi todos los departamentos, no solo en los críticos.
@@ -80,5 +77,5 @@ brechas más críticas?
 
 Si bien los departamentos menos eficientes en la ejecución del gasto público son Ancash, Tumbes, Moquegua, Ica y Madre de Dios, todos por debajo del 90% de avance, frente a un rango de 90-95% en el resto del país. Esa brecha no se explica por una mala gestión generalizada, sino por un tipo de gasto específico, como son los Servicios Económicos (obras, transporte, energía, agro) que están sistemáticamente más atrasados. Ancash llega solo a 70.1%, Ica a 74%, mientras que Servicios Generales y Sociales rondan 80-85% en esos mismos departamentos.
 El gráfico final confirma que este patrón se repite a nivel nacional: la inversión en infraestructura es, en general, el tipo de gasto que peor se ejecuta en todo el Perú. Además, el problema de Ancash aparece tanto en sus municipalidades como en las entidades del Gobierno Nacional que operan ahí, lo que sugiere una dificultad ligada al territorio, no a una sola entidad.
-En resumen, la baja eficiencia de estos cinco departamentos se debe principalmente a su dificultad para ejecutar proyectos de inversión pública (obras, infraestructura,..), no por una debilidad generalizada en toda su gestión presupuestal. Esto sugiere que las políticas de mejora en estos departamentos deberían enfocarse puntualmente en agilizar la ejecución de obras públicas, más que en reformas generales de gestión del gasto.
+En resumen, la baja eficiencia de estos cinco departamentos se debe principalmente a su dificultad para ejecutar proyectos de inversión pública (obras, infraestructura,...), no por una debilidad generalizada en toda su gestión presupuestal. Esto sugiere que las políticas de mejora en estos departamentos deberían enfocarse puntualmente en agilizar la ejecución de obras públicas, más que en reformas generales de gestión del gasto.
 
