@@ -1,5 +1,5 @@
 # Proyecto Final - Análisis Exploratorio de Datos en R
-## Gasto público ejecutado por el Estado Peruano — Cierre 2025
+## Gasto público ejecutado por el Estado Peruano - Cierre 2025
 
 ## 1. Contexto
 
@@ -21,8 +21,7 @@ de su [Portal de Datos Abiertos - Clasificación Funcional del Gasto](https://da
 | `AFIN_AP3`                       | `Monto_asignado`                    |
 | `EJEC_AP3`                       | `Monto_ejecutado`                   |
 
-Variable derivada: `avance_pct = Monto_ejecutado / Monto_asignado * 100`
-(% de ejecución del presupuesto).
+Variable derivada: `avance_pct = Monto_ejecutado / Monto_asignado * 100` (% de ejecución del presupuesto).
 
 ## 2. Estructura del repositorio
 
